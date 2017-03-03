@@ -1,5 +1,7 @@
 .DS_Store
 node_modules
-test
+
+# `test` is for unit tests and should not be delivered to staging or production servers
+# test
 .env
 env.json
