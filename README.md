@@ -1,4 +1,5 @@
-# A demo API project for Node.js, Express.js, and MongoDB
+# Description
+An API project using NodeJS with ExpressJS and MongoDB using Mongoose. This is a TODO API that is meant to serve as an exercise on how to implement NodeJS, ExpressJS, and MongoDB as a backend. I enjoy working with JavaScript and wanted to do a refresher on what I've already learned and work in some things I haven't tried yet.
 
 # Index
 - [Use](#user-content-use)
