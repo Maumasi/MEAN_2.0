@@ -255,6 +255,7 @@ Failed response:
 <br>
 
 # Resources
+- [ExpressJS](http://expressjs.com/)
 - [MongoDB Docs](https://docs.mongodb.com/manual/tutorial/query-documents/)
 - [Mongoose Docs](http://mongoosejs.com/docs/guide.html)
 - [Postman for testing APIs](https://www.getpostman.com/docs/)
