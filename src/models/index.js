@@ -12,15 +12,15 @@ exports.add = (record) => {
 
 // read
 exports.find = (record) => {
-  return require('./crud/create_task')(collection[record]);
+  return require('./crud/read_task')(collection[record]);
 };
 
 // update
 exports.update = (record) => {
-  return require('./crud/create_task')(collection[record]);
+  return require('./crud/update_task')(collection[record]);
 };
 
 // delete
 exports.remove = (record) => {
-  return require('./crud/create_task')(collection[record]);
+  return require('./crud/delete_task')(collection[record]);
 };
