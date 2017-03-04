@@ -14,7 +14,7 @@ const TaskSchema = new Schema({
     default: false,
   },
   finishedAt: {
-    type: Number,
+    type: String,
     default: null,
   },
 });

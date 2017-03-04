@@ -8,7 +8,9 @@ module.exports = (req, res) => {
   Task.findByIdAndUpdate({ _id: id }, todoProps)
     .then(() => {
       Task.findById({ _id: id })
+        // success
         .then(task => res.json(task));
     })
+    // fail
     .catch(() => res.json({ fail: 'Failed to update task' }));
 };

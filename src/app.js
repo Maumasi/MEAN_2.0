@@ -10,7 +10,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', routes(express));
-
 // app.use(express.static('./public'));
 
 module.exports = app;
