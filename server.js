@@ -1,3 +1,6 @@
+// use the `.env` file
+const dotenv = require('dotenv');
+dotenv.load();
 
 const app = require('./src/app');
 
