@@ -14,7 +14,6 @@
 
 To get started with this TODO app just issue a pull request from inside a new directory and install dependancies.
 ```bash
-
 $ cd /path/to/new/project/directory
 $ git init
 $ git pull https://github.com/Maumasi/MEAN_2.0.git
@@ -63,21 +62,29 @@ Alternatively you can start the MongoDB server with which will keep the MongoDB 
 $ brew services start mongo
 ```
 **Note**
-If you choose the alternate option to start MongoDB with `brew services start mongo` it will start up and run even when the terminal window that executed the command is closed. Also, it with run the MongoDB server everytime you start your machien. Just remember to stop the MongoDB server when you're ready to shut it down with:
+If you choose the alternate option to start MongoDB with `brew services start mongo` it will start up and run even when the terminal window that executed the command is closed. Also, it with run the MongoDB server every time you start your machine. Just remember to stop the MongoDB server when you're ready to shut it down with:
 ```bash
 $ brew services stop mongo
 ```
 You should now have MongoDB installed and running. <br>
-Robomongo is a very useful GUI for MongoDB. A link is provided in the Resources section at the bottom of this README on how to install the Robomongo GUI.
+Robomongo is a very useful GUI for MongoDB. A link is provided in the Resources section at the bottom of this README on how to install the Robomongo GUI. For instructions on how to get started with Robomongo, MongoDB, or mongoose checkout the [Resources](#user-content-resources) section at the bottom for links to the guides.
 
 ---
 <br>
 
 # Running The TODO App
 Now that all dependancies are installed and MongoDB is installed and running the only thing left to get this API off the ground, locally, is to start the `server.js` script. Just enter the following command:
-```JavaScript
-$ cd
+```bash
+# if you're not already inside the ROOT directory
+$ cd /path/to/new/project/directory
+
+$ node server.js
 ```
+The server should be now and a print to the terminal should read:
+```bash
+Server running on port 3000
+```
+A very useful app to test out this API is called *Postman*. A link on how to install and use this tool is in the [Resources](#user-content-resources) section.
 
 ---
 <br>
@@ -248,9 +255,9 @@ Failed response:
 <br>
 
 # Resources
-
 - [MongoDB Docs](https://docs.mongodb.com/manual/tutorial/query-documents/)
 - [Mongoose Docs](http://mongoosejs.com/docs/guide.html)
+- [Postman for testing APIs](https://www.getpostman.com/docs/)
 - [Install Homebrew](https://brew.sh/)
 - [Install MongoDB with Homebrew](https://docs.mongodb.com/master/tutorial/install-mongodb-on-os-x/?_ga=1.219543249.977592285.1488563147)
 - [Install Robomongo](https://robomongo.org/)
