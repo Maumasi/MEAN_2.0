@@ -6,6 +6,7 @@ module.exports = (express) => {
   // ==========================================   submit to database
   // route: /todo/v1
   router.post('/add', TodoController.create);
+  router.put('/edit/:id', TodoController.edit);
 
   return router;
 };
