@@ -5,7 +5,7 @@ module.exports = (express) => {
 
   // ==========================================   submit to database
   // route: /todo/v1
-  router.post('/add', TodoController.addTask);
+  router.post('/add', TodoController.create);
 
   return router;
 };
