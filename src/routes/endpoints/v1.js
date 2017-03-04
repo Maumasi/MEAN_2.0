@@ -7,6 +7,7 @@ module.exports = (express) => {
   // ==========================================
   router.post('/add', TodoController.create);
   router.put('/edit/:id', TodoController.update);
+  router.delete('/remove/:id', TodoController.delete);
 
   return router;
 };

@@ -1,6 +1,6 @@
 
 module.exports = {
-  create: require('./logic/add_task'),
-  update: require('./logic/update_task'),
-  delete: require('./logic/update_task'),
+  create: require('./v1/add_task'),
+  update: require('./v1/update_task'),
+  delete: require('./v1/delete_task'),
 };
