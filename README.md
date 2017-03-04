@@ -80,7 +80,7 @@ $ cd /path/to/new/project/directory
 
 $ node server.js
 ```
-The server should be now and a print to the terminal should read:
+The server should running be now and a print to the terminal should read:
 ```bash
 Server running on port 3000
 ```
