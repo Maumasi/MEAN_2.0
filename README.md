@@ -66,7 +66,7 @@ The `:id` in a route like `/todo/v1/:id` represents a parameter that should actu
 
 ## Expected request body and responses for each endpoint:
 
-**`/todo/v1/`** <br>
+### **`/todo/v1/`** <br>
 Expected request body: **No request body needed for this endpoint** <br>
 
 Successful response: request body received
@@ -110,7 +110,7 @@ Failed response: request body rejected
 
 <br>
 
-**`/todo/v1/:id`** <br>
+### **`/todo/v1/:id`** <br>
 Expected request body: **No request body needed for this endpoint** <br>
 
 Successful response: request body received
@@ -134,7 +134,7 @@ Failed response: request body rejected
 
 <br>
 
-**`/todo/v1/add`** <br>
+### **`/todo/v1/add`** <br>
 Expected request body:
 ```JavaScript
 {
@@ -162,7 +162,7 @@ Failed response: request body rejected
 
 <br>
 
-**`/todo/v1/edit/:id`** <br>
+### **`/todo/v1/edit/:id`** <br>
 Expected request body:
 ```JavaScript
 // /todo/v1/edit/58baa59396135106e7a3af7f
@@ -192,7 +192,7 @@ Failed response: request body rejected
 
 <br>
 
-**`/todo/v1/remove/:id`** <br>
+### **`/todo/v1/remove/:id`** <br>
 Expected request body: **No request body needed for this endpoint** <br>
 
 Successful response:
