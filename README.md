@@ -1,17 +1,36 @@
 # A demo API project for Node.js, Express.js, and MongoDB
 
 # Index
-- [Use]()
-- [Installing MongoDB]()
-- [API End points]()
-- [Resources]()
+- [Use](#user-content-use)
+- [Installing MongoDB](#user-content-installing-mongoDB)
+- [Running The TODO App]()
+- [API Endpoints](#user-content-api-endpoints)
+- [Resources](#user-content-resources)
 
 # Use
 
-To start using this TODO app it first needs the dependancies installed.
+To get started with this TODO app just issue a pull request from inside a new directory and install dependancies.
 ```bash
+
+$ cd /path/to/new/project/directory
+$ git init
+$ git pull https://github.com/Maumasi/MEAN_2.0.git
 $ npm install
 ```
+Next you'll have to rename the file `env.dist` in the ROOT directory to `.env`. The default values for this file are for development only. Any real credentials should NEVER be committed with `git`! <br>
+Default values are:
+```bash
+PORT=3000
+DB_NAME=todo
+DB_TEST_NAME=todo_test
+DB_USER=
+DB_PW=
+DB_HOST=localhost
+DB_SCHEMA=mongodb
+DB_PORT=
+```
+**Note**
+On a linux Ubuntu machine these variables would be set in `/etc/environment`. If you'll planning to deploy with another OS check to see where these environmental variable should be set.
 
 ---
 <br>
@@ -51,7 +70,16 @@ Robomongo is a very useful GUI for MongoDB. A link is provided in the Resources 
 ---
 <br>
 
-# API End points
+# Running The TODO App
+Now that all dependancies are installed and MongoDB is installed and running the only thing left to get this API off the ground, locally, is to start the `server.js` script. Just enter the following command:
+```JavaScript
+$ cd
+```
+
+---
+<br>
+
+# API Endpoints
 There are 5 endpoints for this API:
 - `/todo/v1/`: return all todo tasks
 - `/todo/v1/:id`: return an individual task
