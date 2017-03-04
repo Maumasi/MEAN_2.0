@@ -7,6 +7,9 @@
 - [API Endpoints](#user-content-api-endpoints)
 - [Resources](#user-content-resources)
 
+---
+<br>
+
 # Use
 
 To get started with this TODO app just issue a pull request from inside a new directory and install dependancies.
