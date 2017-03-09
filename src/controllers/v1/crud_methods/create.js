@@ -1,6 +1,3 @@
-// model
-// const Task = require('../../../models/collections/task');
-// const User = require('../../../models/collections/user');
 
 module.exports = (Model) => {
   return (req, res) => {
