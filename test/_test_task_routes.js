@@ -36,16 +36,21 @@ describe('Task endpoints', () => {
       finishedAt: testDate,
     })
     .end((error, res) => {
-      const test = res.body;
-      assert(test.finishedAt === testDate);
+      assert(res.statusCode <= 204 && res.statusCode >= 200);
       done();
     });
   });
 
 
   it('find by id: /todo/v1/task/:id', (done) => {
-    assert(1 + 1 === 2);
-    done();
+    request(app)
+      .get(`/todo/v1/task/${testId}`)
+      .end((error, res) => {
+        if (res.body) {
+          assert(res.body._id === testId);
+          done();
+        }
+      });
   });
 
   it('find all: /todo/v1/tasks/', (done) => {
@@ -61,7 +66,11 @@ describe('Task endpoints', () => {
 
 
   it('delete: /todo/v1/task/remove/:id', (done) => {
-    assert(1 + 1 === 2);
-    done();
+    request(app)
+      .delete(`/todo/v1/task/remove/${testId}`)
+      .end((error, res) => {
+        assert(res.statusCode <= 204 && res.statusCode >= 200);
+        done();
+      });
   });
 });
