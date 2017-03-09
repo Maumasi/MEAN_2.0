@@ -1,27 +1,31 @@
 // model
-const Task = require('../../../models/collections/task');
+// const Task = require('../../../models/collections/task');
+// const User = require('../../../models/collections/user');
 
-module.exports = (req, res) => {
-  const props = req.body;
+module.exports = (Model) => {
+  return (req, res) => {
+    const props = req.body;
 
-  const { description } = props;
-
-  let modelType;
-  if(description) {
-    modelType = Task;
-  }
-
-  modelType.create(props)
-    // success
-    .then((taskData) => {
-      res.json(taskData);
-    })
-    // fail
-    .catch(
-      () => {
-        res.json({
-          fail: 'Task not saved',
-        });
-      }
-    );
+    Model.create(props)
+      // success
+      .then((data) => {
+        res.json(data);
+      })
+      // fail
+      .catch(
+        () => {
+          // if this is a Task being saved and failed
+          if (props.description) {
+            res.json({
+              fail: 'Task not saved',
+            });
+          } else {
+            // if this is a User being saved and failed
+            res.json({
+              fail: 'User not saved',
+            });
+          }
+        }
+      );
+  };
 };
