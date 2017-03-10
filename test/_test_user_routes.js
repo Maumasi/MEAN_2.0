@@ -7,8 +7,8 @@ const assert = require('assert');
 const request = require('supertest');
 const app = require('../src/app');
 
-const testUsername = 'test123';
-const testEmail = 'testUser@mail.com';
+const testEmail1 = 'stud123@mail.com';
+const testEmail2 = 'testUser@mail.com';
 let testId;
 
 
@@ -17,15 +17,15 @@ describe('User endpoints', () => {
     request(app)
       .post('/todo/v1/user/add')
       .send({
-        username: testUsername,
-        email: 'stud123@mail.com',
+        username: 'stud123',
+        email: testEmail1,
         password: 'qwer1234',
       })
       .end((error, res) => {
         const test = res.body;
         testId = test._id;
 
-        assert(test.username === testUsername);
+        assert(test.email === testEmail1);
         done();
       });
   });
@@ -35,7 +35,7 @@ describe('User endpoints', () => {
     request(app)
     .put(`/todo/v1/user/edit/${testId}`)
     .send({
-      email: testEmail,
+      email: testEmail2,
     })
     .end((error, res) => {
       assert(res.statusCode <= 204 && res.statusCode >= 200);

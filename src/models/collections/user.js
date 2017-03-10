@@ -40,6 +40,11 @@ const UserSchema = new Schema({
   }],
 });
 
+UserSchema.methods.toJSON = function () {
+  const { _id, email } = this;
+  return { _id, email };
+};
+
 UserSchema.methods.createToken = function () {
   const user = this;
   const access = 'auth';
