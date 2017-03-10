@@ -19,6 +19,7 @@ describe('User endpoints', () => {
       .send({
         username: testUsername,
         email: 'stud123@mail.com',
+        password: 'qwer1234',
       })
       .end((error, res) => {
         const test = res.body;
