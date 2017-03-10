@@ -36,15 +36,24 @@ const UserSchema = new Schema({
     token: {
       type: String,
       required: true,
-    }
+    },
   }],
 });
 
-UserSchema.method.createToken = function() {
+UserSchema.methods.createToken = function () {
   const user = this;
   const access = 'auth';
-  const token = jwt.sign({}, 'qwe123'); 
-}
+  // create a token
+  const token = jwt.sign({ _id: user._id.toHexString(), access }, 'qwe123').toString();
+
+  user.tokens.push({ access, token });
+
+  // return the token for the `.then()` func when this method is called
+  return user.save()
+    .then(() => {
+      return token;
+    });
+};
 
 const User = mongoose.model('user', UserSchema);
 module.exports = User;

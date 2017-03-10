@@ -1,28 +1,36 @@
 
-module.exports = (Model) => {
+module.exports = (Model, instance = 'model') => {
   return (req, res) => {
     const props = req.body;
+    const modelInstance = Model.create(props);
 
-    Model.create(props)
-      // success
-      .then((data) => {
-        res.json(data);
+    // create token if the instance model is a 'user'
+    if (instance === 'user') {
+      modelInstance.then((user) => {
+        console.log(user);
+        return user.createToken();
       })
-      // fail
-      .catch(
-        () => {
-          // if this is a Task being saved and failed
-          if (props.description) {
-            res.json({
-              fail: 'Task not saved',
-            });
-          } else {
-            // if this is a User being saved and failed
-            res.json({
-              fail: 'User not saved',
-            });
-          }
-        }
-      );
+      .then((token) => {
+        res.header('x-auth', token).send(modelInstance);
+      });
+    // create token if the instance model is a 'task'
+    } else {
+      modelInstance.then((data) => {
+        res.json(data);
+      });
+    }
+    // fail
+    modelInstance.catch(() => {
+      // if this is a User being saved and failed
+      if (instance === 'user') {
+        res.json({
+          fail: 'User not saved',
+        });
+      } else {
+        res.json({
+          fail: 'Task not saved',
+        });
+      }// if
+    });
   };
 };
