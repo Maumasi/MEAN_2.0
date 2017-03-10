@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const jwt = require('jsonwebtoken');
 
 const Schema = mongoose.Schema;
 // schema for the user collection
@@ -38,6 +39,12 @@ const UserSchema = new Schema({
     }
   }],
 });
+
+UserSchema.method.createToken = function() {
+  const user = this;
+  const access = 'auth';
+  const token = jwt.sign({}, 'qwe123'); 
+}
 
 const User = mongoose.model('user', UserSchema);
 module.exports = User;
