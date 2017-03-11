@@ -11,7 +11,7 @@ module.exports = (Model, instance = 'model') => {
         return user;
       })
       .then((user) => {
-        res.header('x-auth', user.tokens.token).send(user);
+        res.header('x-auth', user.tokens[0].token).send(user);
       });
     // create token if the instance model is a 'task'
     } else {

@@ -14,6 +14,6 @@ module.exports = (model) => {
 
     // user specific controller functions
     login: require('./user_account/login')(models[model]),
-    // logout: require('./user_account/logout')(models.user)
+    logout: require('./user_account/logout')(models[model]),
   };
 };

@@ -6,10 +6,10 @@ const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 // schema for the user collection
 const UserSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-  },
+  // username: {
+  //   type: String,
+  //   required: true,
+  // },
   email: {
     type: String,
     required: true,
@@ -58,6 +58,15 @@ UserSchema.methods.createToken = function () {
     .then(() => {
       return token;
     });
+};
+
+
+UserSchema.methods.deleteToken = function (token) {
+  return this.update({
+    $pull: {
+      tokens: { token },
+    },
+  });
 };
 
 

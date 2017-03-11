@@ -1,5 +1,5 @@
 // middleware
-// const { authenticateUser } = require('../../middleware/index.js');
+const { authenticateUser } = require('../../middleware/index.js');
 
 const TodoController = require('../../controllers/v1')('task');
 const UserController = require('../../controllers/v1')('user');
@@ -22,5 +22,6 @@ module.exports = (express) => {
 
   // user specific routes
   router.post('/user/login', UserController.login);
+  router.delete('/user/logout', authenticateUser, UserController.logout);
   return router;
 };

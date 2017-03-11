@@ -3,7 +3,10 @@ module.exports = (User) => {
   return (req, res) => {
     User.checkCredentials(req.body)
       .then((user) => {
-        res.json(user);
+        return user.createToken()
+          .then((token) => {
+            res.header('x-auth', token).json(user);
+          });
       })
       // failed credentials check
       .catch(() => {
