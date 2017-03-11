@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../src/app');
 
+const testPassword = 'qwer1234';
 const testEmail1 = 'stud123@mail.com';
 const testEmail2 = 'testUser@mail.com';
 const userId = mongoose.Types.ObjectId();
@@ -22,7 +23,7 @@ describe('User endpoints', () => {
         _id: userId,
         username: 'stud123',
         email: testEmail1,
-        password: 'qwer1234',
+        password: testPassword,
       })
       .end((error, res) => {
         const test = res.body;
@@ -49,6 +50,22 @@ describe('User endpoints', () => {
   it('find by id: /todo/v1/user/:id', (done) => {
     request(app)
       .get(`/todo/v1/user/${testId}`)
+      .end((error, res) => {
+        if (res.body) {
+          assert(res.body._id === testId);
+          done();
+        }
+      });
+  });
+
+
+  it('user login: /todo/v1/user/login', (done) => {
+    request(app)
+      .post('/todo/v1/user/login')
+      .send({
+        email: testEmail2,
+        password: testPassword,
+      })
       .end((error, res) => {
         if (res.body) {
           assert(res.body._id === testId);
