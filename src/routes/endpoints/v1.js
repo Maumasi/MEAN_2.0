@@ -9,11 +9,11 @@ module.exports = (express) => {
 
   // parent route: /todo/v1
   // ==========================================
-  router.post('/task/add', TodoController.create);
+  router.post('/task/add', authenticateUser, TodoController.create);
   router.put('/task/edit/:id', TodoController.update);
   router.delete('/task/remove/:id', TodoController.delete);
-  router.get('/task/:id', TodoController.find.byId);
-  router.get('/tasks', TodoController.find.all);
+  router.get('/task/:id', authenticateUser, TodoController.find.byId);
+  router.get('/tasks', authenticateUser, TodoController.find.all);
 
   router.post('/user/add', UserController.create);
   router.put('/user/edit/:id', UserController.update);

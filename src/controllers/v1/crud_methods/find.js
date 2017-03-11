@@ -12,7 +12,7 @@ module.exports = (Model) => {
     },
 
     all(req, res) {
-      Model.find({})
+      Model.find({ _owner: req.user._id })
         // success
         .then(tasks => res.json(tasks))
         // fail

@@ -81,7 +81,7 @@ describe('User endpoints', () => {
   });
 
 
-  it('user login: /todo/v1/user/logout', (done) => {
+  it('user logout: /todo/v1/user/logout', (done) => {
     request(app)
       .delete('/todo/v1/user/logout')
       .set('x-auth', testToken)
