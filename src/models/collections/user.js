@@ -53,6 +53,13 @@ UserSchema.methods.createToken = function () {
   // create a token
   const token = jwt.sign({ _id: this._id.toHexString(), access }, 'qwe123').toString();
   this.tokens.push({ access, token });
+  // return the token for the `.then()` func when this method is called
+  return this.save()
+    .then(() => {
+      return token;
+    });
+};
+
 
 // custom query method for the user
 UserSchema.statics.findByToken = function (token) {
@@ -73,10 +80,26 @@ UserSchema.statics.findByToken = function (token) {
   });
 };
 
-  // return the token for the `.then()` func when this method is called
-  return this.save()
-    .then(() => {
-      return token;
+
+UserSchema.statics.checkCredentials = function ({ email, password }) {
+  console.log(email);
+  console.log(password);
+  this.findOne({ email })
+    .then((user) => {
+      if (!user) {
+        return Promise.reject();
+      }
+
+      return new Promise((resolve, reject) => {
+        bcrypt.compare(password, user.password, (error, isSamePassword) => {
+          if (isSamePassword) {
+            resolve(user);
+          } else {
+            reject();
+          }
+          return isSamePassword;
+        });
+      });
     });
 };
 
@@ -94,5 +117,6 @@ UserSchema.pre('save', function (next) {
     next();
   }
 });
+
 const User = mongoose.model('user', UserSchema);
 module.exports = User;

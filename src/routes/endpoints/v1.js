@@ -19,5 +19,8 @@ module.exports = (express) => {
   router.put('/user/edit/:id', UserController.update);
   router.delete('/user/remove/:id', UserController.delete);
   router.get('/user/:id', UserController.find.byId);
+
+  // user specific routes
+  router.post('/user/login', UserController.login);
   return router;
 };
