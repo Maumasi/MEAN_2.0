@@ -83,18 +83,6 @@ describe('User endpoints', () => {
   });
 
 
-  // it('user logout: /todo/v1/user/logout', (done) => {
-  //   request(app)
-  //     .delete('/todo/v1/user/logout')
-  //     .set('x-auth', testToken)
-  //     .end((error, res) => {
-  //       if (res.body) {
-  //         assert(res.body);
-  //         done();
-  //       }
-  //     });
-  // });
-
   it('delete: /todo/v1/user/remove/:id', (done) => {
     request(app)
       .delete(`/todo/v1/user/remove/${testId}`)
@@ -102,6 +90,19 @@ describe('User endpoints', () => {
       .end((error, res) => {
         assert(res.statusCode <= 204 && res.statusCode >= 200);
         done();
+      });
+  });
+
+
+  it('user logout: /todo/v1/user/logout', (done) => {
+    request(app)
+      .delete('/todo/v1/user/logout')
+      .set('x-auth', testToken)
+      .end((error, res) => {
+        if (res.body) {
+          assert(res.body);
+          done();
+        }
       });
   });
 });

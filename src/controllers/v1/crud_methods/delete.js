@@ -9,7 +9,6 @@ module.exports = (Model, instance = 'model') => {
       options = { _id: req.user._id, 'tokens.token': req.token };
     }
 
-    console.log(options);
     Model.findOneAndRemove(options)
       // success
       .then((task) => {
