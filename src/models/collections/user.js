@@ -62,7 +62,6 @@ UserSchema.statics.findByToken = function (token) {
   try {
     decrypt = jwt.verify(token, 'qwe123');
   } catch (e) {
-    console.log('Error: JWT verification failed');
     // force the .catch() for this, .findByOne()
     return Promise.reject();
   }

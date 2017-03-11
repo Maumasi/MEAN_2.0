@@ -6,7 +6,6 @@ dotenv.load();
 const assert = require('assert');
 const mongoose = require('mongoose');
 const request = require('supertest');
-const jwt = require('jsonwebtoken');
 const app = require('../src/app');
 
 const testEmail1 = 'stud123@mail.com';
@@ -28,7 +27,6 @@ describe('User endpoints', () => {
       .end((error, res) => {
         const test = res.body;
         testId = test._id;
-
         assert(test.email === testEmail1);
         done();
       });
