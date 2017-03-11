@@ -4,11 +4,14 @@ const dotenv = require('dotenv');
 dotenv.load();
 
 const assert = require('assert');
+const mongoose = require('mongoose');
 const request = require('supertest');
+const jwt = require('jsonwebtoken');
 const app = require('../src/app');
 
 const testEmail1 = 'stud123@mail.com';
 const testEmail2 = 'testUser@mail.com';
+const userId = mongoose.Types.ObjectId();
 let testId;
 
 
@@ -17,6 +20,7 @@ describe('User endpoints', () => {
     request(app)
       .post('/todo/v1/user/add')
       .send({
+        _id: userId,
         username: 'stud123',
         email: testEmail1,
         password: 'qwer1234',
@@ -38,7 +42,7 @@ describe('User endpoints', () => {
       email: testEmail2,
     })
     .end((error, res) => {
-      assert(res.statusCode <= 204 && res.statusCode >= 200);
+      assert(res.body.email === testEmail2);
       done();
     });
   });
