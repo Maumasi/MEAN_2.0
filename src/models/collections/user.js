@@ -81,10 +81,10 @@ UserSchema.statics.findByToken = function (token) {
     return Promise.reject();
   }
 
-  this.findByOne({
-    _id: decrypt._id,
+  return this.findOne({
+    '_id': decrypt._id,
     'tokens.token': token,
-    'tokens.auth': 'auth',
+    'tokens.access': 'auth',
   });
 };
 
