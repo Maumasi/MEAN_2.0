@@ -6,9 +6,10 @@ module.exports = (Model, instance = 'model') => {
     if (instance === 'task') {
       options = { _id: id, _owner: req.user._id };
     } else {
-      options = { _id: id, 'tokens.token': req.token };
+      options = { _id: req.user._id, 'tokens.token': req.token };
     }
-    console.log(instance);
+
+    console.log(options);
     Model.findOneAndRemove(options)
       // success
       .then((task) => {

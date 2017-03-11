@@ -32,11 +32,9 @@ describe('Task endpoints', () => {
         // capture the session token
         User.findById(testId).then((user) => {
           testToken = user.tokens[0].token;
+          assert(test.email === testEmail1);
+          done();
         });
-
-
-        assert(test.email === testEmail1);
-        done();
       });
   });
 
@@ -61,6 +59,7 @@ describe('Task endpoints', () => {
   it('update: /todo/v1/task/edit/:id', (done) => {
     request(app)
     .put(`/todo/v1/task/edit/${testId}`)
+    .set('x-auth', testToken)
     .send({
       description: 'updated',
       finishedAt: testDate,

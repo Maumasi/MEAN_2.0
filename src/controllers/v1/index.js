@@ -8,7 +8,7 @@ module.exports = (model) => {
   return {
     // shared controller functions
     create: require('./crud_methods/create')(models[model], model),
-    update: require('./crud_methods/update')(models[model]),
+    update: require('./crud_methods/update')(models[model], model),
     delete: require('./crud_methods/delete')(models[model], model),
     find: require('./crud_methods/find')(models[model], model),
 
