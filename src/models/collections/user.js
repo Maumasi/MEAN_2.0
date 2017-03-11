@@ -64,7 +64,6 @@ UserSchema.methods.createToken = function () {
 // custom query method for the user
 UserSchema.statics.findByToken = function (token) {
   let decrypt;
-
   // prevent app from crashing if JWT verification fails
   try {
     decrypt = jwt.verify(token, 'qwe123');
@@ -82,9 +81,7 @@ UserSchema.statics.findByToken = function (token) {
 
 
 UserSchema.statics.checkCredentials = function ({ email, password }) {
-  console.log(email);
-  console.log(password);
-  this.findOne({ email })
+  return this.findOne({ email })
     .then((user) => {
       if (!user) {
         return Promise.reject();
@@ -97,7 +94,6 @@ UserSchema.statics.checkCredentials = function ({ email, password }) {
           } else {
             reject();
           }
-          return isSamePassword;
         });
       });
     });
