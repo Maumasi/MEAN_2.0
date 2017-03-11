@@ -21,7 +21,6 @@ describe('User endpoints', () => {
       .post('/todo/v1/user/add')
       .send({
         _id: userId,
-        username: 'stud123',
         email: testEmail1,
         password: testPassword,
       })
@@ -73,6 +72,20 @@ describe('User endpoints', () => {
         }
       });
   });
+
+
+  // it('user login: /todo/v1/user/logout', (done) => {
+  //   request(app)
+  //     .delete('/todo/v1/user/logout')
+  //     .set('x-auth', testToken)
+  //     .end((error, res) => {
+  //       if (res.body) {
+  //         console.log(res.body);
+  //         assert(res.body);
+  //         done();
+  //       }
+  //     });
+  // });
 
 
   it('delete: /todo/v1/user/remove/:id', (done) => {

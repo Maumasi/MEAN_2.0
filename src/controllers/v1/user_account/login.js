@@ -11,7 +11,7 @@ module.exports = (User) => {
       // failed credentials check
       .catch(() => {
         res.json({
-          fail: 'User failed to login this credentials',
+          fail: 'User failed to login with credentials',
         });
       });
   };
