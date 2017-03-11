@@ -4,7 +4,6 @@ module.exports = (req, res, next) => {
   const token = req.header('x-auth');
   User.findByToken(token)
     .then((user) => {
-      console.log(user);
       if (!user) {
         return Promise.reject();
       }

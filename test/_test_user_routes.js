@@ -7,12 +7,14 @@ const assert = require('assert');
 const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../src/app');
+const User = require('../src/models/collections/user');
 
 const testPassword = 'qwer1234';
 const testEmail1 = 'stud123@mail.com';
 const testEmail2 = 'testUser@mail.com';
 const userId = mongoose.Types.ObjectId();
 let testId;
+let testToken;
 
 
 describe('User endpoints', () => {
@@ -27,6 +29,11 @@ describe('User endpoints', () => {
       .end((error, res) => {
         const test = res.body;
         testId = test._id;
+        // capture the session token
+        User.findById(testId).then((user) => {
+          testToken = user.tokens[0].token;
+        });
+
         assert(test.email === testEmail1);
         done();
       });
@@ -74,18 +81,17 @@ describe('User endpoints', () => {
   });
 
 
-  // it('user login: /todo/v1/user/logout', (done) => {
-  //   request(app)
-  //     .delete('/todo/v1/user/logout')
-  //     .set('x-auth', testToken)
-  //     .end((error, res) => {
-  //       if (res.body) {
-  //         console.log(res.body);
-  //         assert(res.body);
-  //         done();
-  //       }
-  //     });
-  // });
+  it('user login: /todo/v1/user/logout', (done) => {
+    request(app)
+      .delete('/todo/v1/user/logout')
+      .set('x-auth', testToken)
+      .end((error, res) => {
+        if (res.body) {
+          assert(res.body);
+          done();
+        }
+      });
+  });
 
 
   it('delete: /todo/v1/user/remove/:id', (done) => {
