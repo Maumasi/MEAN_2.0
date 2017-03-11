@@ -56,6 +56,7 @@ describe('User endpoints', () => {
   it('find by id: /todo/v1/user/:id', (done) => {
     request(app)
       .get(`/todo/v1/user/${testId}`)
+      .set('x-auth', testToken)
       .end((error, res) => {
         if (res.body) {
           assert(res.body._id === testId);
@@ -93,10 +94,10 @@ describe('User endpoints', () => {
       });
   });
 
-
   it('delete: /todo/v1/user/remove/:id', (done) => {
     request(app)
-      .delete(`/todo/v1/user/remove/${testId}`)
+      .delete(`/todo/v1/user/remove/${userId}`)
+      .set('x-auth', testToken)
       .end((error, res) => {
         assert(res.statusCode <= 204 && res.statusCode >= 200);
         done();

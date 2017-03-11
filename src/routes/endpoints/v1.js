@@ -11,14 +11,14 @@ module.exports = (express) => {
   // ==========================================
   router.post('/task/add', authenticateUser, TodoController.create);
   router.put('/task/edit/:id', TodoController.update);
-  router.delete('/task/remove/:id', TodoController.delete);
+  router.delete('/task/remove/:id', authenticateUser, authenticateUser, TodoController.delete);
   router.get('/task/:id', authenticateUser, TodoController.find.byId);
   router.get('/tasks', authenticateUser, TodoController.find.all);
 
   router.post('/user/add', UserController.create);
   router.put('/user/edit/:id', UserController.update);
-  router.delete('/user/remove/:id', UserController.delete);
-  router.get('/user/:id', UserController.find.byId);
+  router.delete('/user/remove/:id', authenticateUser, UserController.delete);
+  router.get('/user/:id', authenticateUser, UserController.find.byId);
 
   // user specific routes
   router.post('/user/login', UserController.login);

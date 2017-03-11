@@ -1,5 +1,5 @@
 
-module.exports = (Model) => {
+module.exports = (Model, instance = 'model') => {
   return (req, res) => {
     const { id } = req.params;
     const todoProps = req.body;

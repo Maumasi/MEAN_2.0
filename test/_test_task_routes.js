@@ -62,6 +62,7 @@ describe('Task endpoints', () => {
     request(app)
     .put(`/todo/v1/task/edit/${testId}`)
     .send({
+      description: 'updated',
       finishedAt: testDate,
     })
     .end((error, res) => {
@@ -100,7 +101,7 @@ describe('Task endpoints', () => {
   it('delete: /todo/v1/task/remove/:id', (done) => {
     request(app)
       .delete(`/todo/v1/task/remove/${testId}`)
-      // .set('x-auth', testToken)
+      .set('x-auth', testToken)
       .end((error, res) => {
         assert(res.statusCode <= 204 && res.statusCode >= 200);
         done();
