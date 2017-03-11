@@ -40,21 +40,41 @@ const UserSchema = new Schema({
   }],
 });
 
+// only return SOME of the use's props
 UserSchema.methods.toJSON = function () {
   const { _id, email } = this;
   return { _id, email };
 };
 
+// create a token for the user for authentication
 UserSchema.methods.createToken = function () {
-  const user = this;
   const access = 'auth';
   // create a token
-  const token = jwt.sign({ _id: user._id.toHexString(), access }, 'qwe123').toString();
-  user.tokens.push({ access, token });
+  const token = jwt.sign({ _id: this._id.toHexString(), access }, 'qwe123').toString();
+  this.tokens.push({ access, token });
 
+// custom query method for the user
+UserSchema.statics.findByToken = function (token) {
+  let decrypt;
+
+  // prevent app from crashing if JWT verification fails
+  try {
+    decrypt = jwt.verify(token, 'qwe123');
+  } catch (e) {
+    console.log('Error: JWT verification failed');
+    // force the .catch() for this, .findByOne()
+    return Promise.reject();
+  }
+
+  this.findByOne({
+    _id: decrypt._id,
+    'tokens.token': token,
+    'tokens.auth': 'auth',
+  });
+};
 
   // return the token for the `.then()` func when this method is called
-  return user.save()
+  return this.save()
     .then(() => {
       return token;
     });

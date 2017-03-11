@@ -1,3 +1,5 @@
+const { authenticateUser } = require('../middleware/index.js');
+
 const models = {
   task: require('../../models/collections/task'),
   user: require('../../models/collections/user'),
