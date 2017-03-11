@@ -1,3 +1,5 @@
+// middleware
+// const { authenticateUser } = require('../../middleware/index.js');
 
 const TodoController = require('../../controllers/v1')('task');
 const UserController = require('../../controllers/v1')('user');
