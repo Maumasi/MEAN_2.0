@@ -15,7 +15,7 @@ module.exports = (Model, instance = 'model') => {
         // success
         .then(record => res.json(record))
         // fail
-        .catch(() => res.json({ fail: 'Failed to find task' }));
+        .catch(() => res.json({ fail: `Failed to find ${instance}` }));
     },
 
     all(req, res) {
@@ -23,7 +23,7 @@ module.exports = (Model, instance = 'model') => {
         // success
         .then(records => res.json(records))
         // fail
-        .catch(() => res.json({ fail: 'Failed to tasks tasks' }));
+        .catch(() => res.json({ fail: `Failed to find ${instance}` }));
     },
   };
 };

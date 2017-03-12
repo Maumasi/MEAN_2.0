@@ -15,6 +15,6 @@ module.exports = (Model, instance = 'model') => {
         res.status(204).json(task);
       })
       // fail
-      .catch(() => res.json({ fail: 'Failed to delete task' }));
+      .catch(() => res.json({ fail: `Failed to delete ${instance}` }));
   };
 };

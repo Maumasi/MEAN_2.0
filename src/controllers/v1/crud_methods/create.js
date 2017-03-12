@@ -25,17 +25,6 @@ module.exports = (Model, instance = 'model') => {
       });
     }
     // fail
-    modelInstance.catch(() => {
-      // if this is a User being saved and failed
-      if (instance === 'user') {
-        res.json({
-          fail: 'User not saved',
-        });
-      } else {
-        res.json({
-          fail: 'Task not saved',
-        });
-      }// if
-    });
+    modelInstance.catch(() => res.json({ fail: `Failed to create ${instance}` }));
   };
 };

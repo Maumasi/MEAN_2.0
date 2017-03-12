@@ -18,6 +18,6 @@ module.exports = (Model, instance = 'model') => {
           .then(task => res.json(task));
       })
       // fail
-      .catch(() => res.json({ fail: 'Failed to update task' }));
+      .catch(() => res.json({ fail: `Failed to update ${instance}` }));
   };
 };
