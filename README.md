@@ -415,12 +415,53 @@ Failed response:
 
 
 # Unit Tests
+To run the unit tests that test all the API endpoints all you have to do is enter the following command in the terminal:
+```bash
+$ npm run test
+```
+**Note:**
+This command invokes `nodemon`, so if you don't have this installed globally checkout the link to do so in the [Resources](#user-content-resources) section or change the `test` script in the `package.json` file located in the ROOT directory.
+
+Next you will see something that looks like this...
+```bash
+[nodemon] 1.11.0
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching: *.*
+[nodemon] starting `mocha`
 
 
+  Task endpoints
+    ✓ create user to task auth routes (907ms)
+    ✓ create: /todo/v1/task/add
+    ✓ update: /todo/v1/task/edit/:id
+    ✓ find by id: /todo/v1/task/:id
+    ✓ find all: /todo/v1/tasks/
+    ✓ delete: /todo/v1/task/remove/:id
+    ✓ delete user
+
+  User endpoints
+    ✓ create: /todo/v1/user/add (806ms)
+    ✓ update: /todo/v1/user/edit/:id
+    ✓ find by id: /todo/v1/user/:id
+    ✓ user login: /todo/v1/user/login (816ms)
+    ✓ delete: /todo/v1/user/remove/:id
+    ✓ user logout: /todo/v1/user/logout
+
+
+  13 passing (3s)
+
+[nodemon] clean exit - waiting for changes before restart
+```
+If one or more of the unit tests do not pass then there will be a red mark next to the unit test description and an error printout at the end of the test list (the list above).
+
+**Note**
+The server script and the unit test command can run at the same time. Unit tests run on a separate port than the server main API server so you can auto run unit test live while developing. Very nice.
 ---
 <br>
 
 # Resources
+- [Installing NodeJS](https://nodejs.org/en/download/)
+- [Installing **nodemon** globally](https://www.npmjs.com/package/nodemon)
 - [ExpressJS](http://expressjs.com/)
 - [MongoDB Docs](https://docs.mongodb.com/manual/tutorial/query-documents/)
 - [Mongoose Docs](http://mongoosejs.com/docs/guide.html)
