@@ -11,7 +11,7 @@ module.exports = (Model, instance = 'model') => {
     }
     const props = req.body;
 
-    Model.findByIdAndUpdate(options, props)
+    Model.findOneAndUpdate(options, props)
       .then(() => {
         Model.findById({ _id: id })
           // success

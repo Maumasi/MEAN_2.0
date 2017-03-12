@@ -4,7 +4,7 @@ module.exports = (User) => {
     req.user.deleteToken(req.token)
       .then(() => {
         res.json({
-          success: 'User logged out and sessoin token deleted',
+          success: 'User logged out and session token deleted',
         });
       });
   };

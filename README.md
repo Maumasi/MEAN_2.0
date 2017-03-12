@@ -92,20 +92,28 @@ A very useful app to test out this API is called *Postman*. A link on how to ins
 
 # API Endpoints
 There are 5 endpoints for this API:
-- `/todo/v1/`: return all todo tasks
-- `/todo/v1/:id`: return an individual task
-- `/todo/v1/add`: create a new task
-- `/todo/v1/edit/:id`: update and existing task
-- `/todo/v1/remove/:id`: delete an individual task
+**Task Routes**
+- *GET* `/todo/v1/tasks/`: return all todo tasks
+- *GET* `/todo/v1/task/:id`: return an individual task
+- *POST* `/todo/v1/task/add`: create a new task
+- *PUT* `/todo/v1/task/edit/:id`: update and existing task
+- *DELETE* `/todo/v1/task/remove/:id`: delete an individual task
 
+**User Routes**
+- *GET* `/todo/v1/user/:id`: return an individual user
+- *POST* `/todo/v1/user/add`: create a new user
+- *PUT* `/todo/v1/user/edit/:id`: update and existing user
+- *DELETE* `/todo/v1/user/remove/:id`: delete an individual user
+- *POST* `/todo/v1/user/login`: login user
+- *DELETE* `/todo/v1/user/logout`: logout user
 
 **Note**
 The `:id` in a route like `/todo/v1/:id` represents a parameter that should actually be an `_id` of an individual task in the TODO list
 <br>
 
-## Expected request body and responses for each endpoint:
+## Expected request body and responses for **Tasks** routes:
 
-### **`/todo/v1/`** <br>
+### **`/todo/v1/task/`** <br>
 Expected request body: **No request body needed for this endpoint** <br>
 
 Successful response: request body received
@@ -117,6 +125,7 @@ Successful response: request body received
       "description" : "task 0",
       "finishedAt" : null,
       "isFinished" : false,
+      "_owner": "23bca55396135106e7a3af2s",
       "__v" : 0
   }
 
@@ -126,6 +135,7 @@ Successful response: request body received
       "description" : "task 1",
       "finishedAt" : null,
       "isFinished" : false,
+      "_owner": "23bca55396135106e7a3af2s",
       "__v" : 0
   }
 
@@ -135,6 +145,7 @@ Successful response: request body received
       "description" : "task 2",
       "finishedAt" : null,
       "isFinished" : false,
+      "_owner": "23bca55396135106e7a3af2s",
       "__v" : 0
   }
 ]
@@ -143,23 +154,24 @@ Successful response: request body received
 Failed response: request body rejected
 ```JavaScript
 {
-  fail: 'Failed to find tasks'
+  "fail": 'Failed to find tasks'
 }
 ```
 
 <br>
 
-### **`/todo/v1/:id`** <br>
+### **`/todo/v1/task/:id`** <br>
 Expected request body: **No request body needed for this endpoint** <br>
 
 Successful response: request body received
 ```JavaScript
-// /todo/v1/58baa59396135106e7a3af7f
+// /todo/v1/task/58baa59396135106e7a3af7f
 {
     "_id" : ObjectId("58baa59396135106e7a3af7f"),
     "description" : "task 2",
     "finishedAt" : null,
     "isFinished" : false,
+    "_owner": "23bca55396135106e7a3af2s",
     "__v" : 0
 }
 ```
@@ -167,17 +179,17 @@ Successful response: request body received
 Failed response: request body rejected
 ```JavaScript
 {
-  fail: 'Failed to find task'
+  "fail": 'Failed to find task'
 }
 ```
 
 <br>
 
-### **`/todo/v1/add`** <br>
+### **`/todo/v1/task/add`** <br>
 Expected request body:
 ```JavaScript
 {
-  description: 'Description or shorthand of task to be completed'
+  "description": 'Description or shorthand of task to be completed'
 }
 ```
 
@@ -188,6 +200,7 @@ Successful response: request body received
     "description" : "Description or shorthand of task to be completed",
     "finishedAt" : null,
     "isFinished" : false,
+    "_owner": "23bca55396135106e7a3af2s",
     "__v" : 0
 }
 ```
@@ -195,19 +208,19 @@ Successful response: request body received
 Failed response: request body rejected
 ```JavaScript
 {
-  fail: 'Task not saved'
+  "fail": 'Failed to create task'
 }
 ```
 
 <br>
 
-### **`/todo/v1/edit/:id`** <br>
+### **`/todo/v1/task/edit/:id`** <br>
 Expected request body:
 ```JavaScript
-// /todo/v1/edit/58baa59396135106e7a3af7f
+// /todo/v1/task/edit/58baa59396135106e7a3af7f
 {
-  finishedAt: new Date(),
-  isFinished: true
+  "finishedAt": new Date(),
+  "isFinished": true
 }
 ```
 
@@ -218,6 +231,7 @@ Successful response: request body received
     "description" : "Description or shorthand of task to be completed",
     "finishedAt" : "2016-05-18T16:00:00Z",
     "isFinished" : true,
+    "_owner": "23bca55396135106e7a3af2s",
     "__v" : 1
 }
 ```
@@ -225,13 +239,13 @@ Successful response: request body received
 Failed response: request body rejected
 ```JavaScript
 {
-  fail: 'Failed to update task'
+  "fail": 'Failed to update task'
 }
 ```
 
 <br>
 
-### **`/todo/v1/remove/:id`** <br>
+### **`/todo/v1/task/remove/:id`** <br>
 Expected request body: **No request body needed for this endpoint** <br>
 
 Successful response:
@@ -241,6 +255,7 @@ Successful response:
     "description" : "Description or shorthand of task to be completed",
     "finishedAt" : "2016-05-18T16:00:00Z",
     "isFinished" : true,
+    "_owner": "23bca55396135106e7a3af2s",
     "__v" : 1
 }
 ```
@@ -248,9 +263,155 @@ Successful response:
 Failed response:
 ```JavaScript
 {
-  fail: 'Failed to delete task'
+  "fail": 'Failed to delete task'
 }
 ```
+
+---
+<br>
+
+## Expected request body and responses for **User** routes:
+**Note:**
+Users have much of their properties hidden when a user record is returned to prevent malicious manipulation
+
+### **`/todo/v1/user/:id`** <br>
+Expected request body: **No request body needed for this endpoint** <br>
+
+Successful response: request body received
+```JavaScript
+// /todo/v1/user/23bca55396135106e7a3af2s
+{
+  "_id": "23bca55396135106e7a3af2s",
+  "email": "maumasi+1@mail.com"
+}
+```
+
+Failed response: request body rejected
+```JavaScript
+{
+  "fail": 'Failed to find user'
+}
+```
+
+<br>
+
+### **`/todo/v1/user/add`** <br>
+Expected request body:
+```JavaScript
+{
+    "email": "demo_user@mail.com",
+    "password": "password123"
+}
+```
+
+Successful response: request body received
+```JavaScript
+{
+  "_id": "58c49ef57170e9301424105d",
+  "email": "maumasi+1@mail.com"
+}
+```
+
+Failed response: request body rejected
+```JavaScript
+{
+  "fail": 'Failed to create user'
+}
+```
+
+<br>
+
+### **`/todo/v1/user/edit/:id`** <br>
+Expected request body:
+```JavaScript
+// /todo/v1/user/edit/58c49ef57170e9301424105d
+{
+  "email": "new_email@mail.com"
+}
+```
+
+Successful response: request body received
+```JavaScript
+{
+  "_id": "58c49ef57170e9301424105d",
+  "email": "new_email+1@mail.com"
+}
+```
+
+Failed response: request body rejected
+```JavaScript
+{
+  "fail": 'Failed to update user'
+}
+```
+
+<br>
+
+### **`/todo/v1/user/remove/:id`** <br>
+Expected request body: **No request body needed for this endpoint** <br>
+
+Successful response:
+```JavaScript
+// /todo/v1/user/remove/58c49ef57170e9301424105d
+// status code === 204
+```
+
+Failed response:
+```JavaScript
+{
+  "fail": 'Failed to delete user'
+}
+```
+
+<br>
+
+### **`/todo/v1/user/login`** <br>
+Expected request body: <br>
+```JavaScript
+// /todo/v1/user/edit/58c49ef57170e9301424105d
+{
+    "email": "another_demo_user@mail.com",
+    "password": "passwordABCD"
+}
+
+```
+
+Successful response:
+```JavaScript
+{
+  "_id": "58c4a36741a3f03074456c7c",
+  "email": "maumasi@mail.com"
+}
+```
+
+Failed response:
+```JavaScript
+{
+  "fail": "User failed to login with credentials"
+}
+```
+
+<br>
+
+### **`/todo/v1/user/logout`** <br>
+Expected request body: **No request body needed for this endpoint** <br>
+
+Successful response:
+```JavaScript
+{
+  "success": "User logged out and session token deleted"
+}
+```
+
+Failed response:
+```JavaScript
+{
+  "fail": "Could not find user or user was not authenticated"
+}
+```
+
+<br>
+
 
 ---
 <br>
