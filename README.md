@@ -454,8 +454,10 @@ Next you will see something that looks like this...
 ```
 If one or more of the unit tests do not pass then there will be a red mark next to the unit test description and an error printout at the end of the test list (the list above).
 
-**Note** <br>
+**Note**
 The server script and the unit test command can run at the same time. Unit tests run on a separate port than the server main API server so you can auto run unit test live while developing. Very nice.
+
+
 ---
 <br>
 
